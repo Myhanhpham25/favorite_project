@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<p><a href="/favorite">Dashboard</a></p>
+	<p><a href="/logout">Logout</a>
+
+<h1> Welcome to {{user.name}}'s favorite quotes:</h1>
+
+<h4>The count of post: {{user.quotes.all.count}}<h4>
+
+
+<h4>Favorite Quotes: </h4>
+{%for i in user.quotes.all%}
+<p>{{i.quote_by}} : {{i.message}} <p>
+{%endfor%}
+
+
+
+</body>
+</html>

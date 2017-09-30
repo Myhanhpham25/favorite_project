@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dashboard</title>
+</head>
+<body>
+	<a href="/logout">Logout</a>
+
+<h1>Welcome, {{user.name}}!!!</h1>
+
+<h3><p>Check out other users favorite Quotes:</p> 
+{%for i in others%}
+<a href="/favorite/show/{{i.id}}">{{i.name}}</a> || 
+{%endfor%}</h3>
+
+{%if messages%}
+		{%for message in messages%}
+			{%if message.tags == 'error'%}
+				<p style = "color:red">{{message}}</p>
+			{%endif%}
+		{%endfor%}
+	{%endif%}
+
+<h3>Contribute a Quote:</h3>
+<form action = "/favorite/add" method ="post">{%csrf_token%}
+	Quoted By:<input type="text" name="quote_by" placeholder="Enter name"><br>
+
+	Message: <input type="text" name='message' placeholder="Enter name"><br>
+	<input type="submit" name="submit">
+
+</form>
+
+<h3> My favorite Quotes:</h3>
+{%for i in user.quotes.all%}
+<p>{{i.message}} {{i.quote_by}}
+<a href="/favorite/remove/{{i.id}}">Remove From My List</a></p>
+{%endfor%}
+
+<p><h4>Quotable Quotes</h4></p>
+
+{%for i in quotes%}
+<p>{{i.quote_by}} {{i.message}} 
+<a href="/favorite/addfavorite/{{i.id}}">Add to My List</a></p>
+{%endfor%}
+
+</body>
+</html>
